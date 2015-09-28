@@ -1,14 +1,17 @@
 
-var io = require('socket.io'); // useless at the moment
 
 var express = require('express');
 var app = express();
 
 var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 app.get('/', function(req, res){
-  // __dirname  is like __FILE__ in php
   res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', function(socket){
+  console.log('a user connected');
 });
 
 http.listen(3000, function(){
