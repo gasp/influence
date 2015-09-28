@@ -12,6 +12,9 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   console.log('a user connected');
+  socket.on('choice', function(what){
+    console.log('chosen: ' + what);
+  });
 });
 
 http.listen(3000, function(){
