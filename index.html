@@ -17,6 +17,7 @@
       border: 2px solid #f00;
     }
   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
   <h1>What is your favorite music ?</h1>
@@ -51,10 +52,6 @@ window.addEventListener('load', function () {
     });
   }
 
-});
-
-socket.on('message', function (body) {
-  console.log('from server ' + body);
 });
 
 socket.on('total', function (votes) {
