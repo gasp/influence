@@ -30,7 +30,7 @@ io.on('connection', function(socket){
     } else {
       votes.right.total++;
     }
-    sockets.emit('total', votes);
+    io.sockets.emit('total', votes);
   });
 
   socket.on('unchoice', function(what){
@@ -40,7 +40,7 @@ io.on('connection', function(socket){
     } else {
       votes.right.total--;
     }
-    sockets.emit('total', votes);
+    io.sockets.emit('total', votes);
   });
 
 });
