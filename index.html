@@ -37,7 +37,7 @@ var socket = io();
 window.addEventListener('load', function () {
   var choices = document.querySelectorAll('img');
   for (var i = 0; i < choices.length; i++) {
-    choices[i].addEventListener('click', function () {
+    choices[i].addEventListener('mouseover', function () {
       var what = this.getAttribute('alt');
       console.log(what);
       socket.emit('choice', what);
