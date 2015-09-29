@@ -13,7 +13,7 @@
       width: 200px;
       border: 2px solid white;
     }
-    img:hover {
+    .active {
       border: 2px solid #f00;
     }
   </style>
@@ -44,9 +44,22 @@ $(function () {
     if($(this).hasClass('right')) {
       what = 'right';
     }
-    console.log(what);
+
+    // tell the server
     socket.emit('choice', what);
   });
+
+  $('.choice').on('mouseout', function () {
+    var what = 'left';
+    if($(this).hasClass('right')) {
+      what = 'right';
+    }
+
+    // tell the server
+    socket.emit('unchoice', what);
+  });
+
+
 });
 
 // update total

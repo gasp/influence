@@ -24,13 +24,23 @@ io.on('connection', function(socket){
   socket.emit('votes', votes);
 
   socket.on('choice', function(what){
-    console.log('what');
+    console.log(what);
     if (what === 'left') {
       votes.left.total++;
     } else {
       votes.right.total++;
     }
-    socket.emit('total', votes);
+    sockets.emit('total', votes);
+  });
+
+  socket.on('unchoice', function(what){
+    console.log('what');
+    if (what === 'left') {
+      votes.left.total--;
+    } else {
+      votes.right.total--;
+    }
+    sockets.emit('total', votes);
   });
 
 });
