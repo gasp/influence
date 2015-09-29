@@ -1,7 +1,6 @@
-
-
 var express = require('express');
 var app = express();
+var choices = require('./choices.json');
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -10,22 +9,30 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-var votes = {
-  'justin bieber': 0,
-  'one direction': 0
+
+var votes = null;
+var start = function (i, socket) {
+  votes =  choices[i];
+  votes.left.total = 0;
+  votes.right.total = 0;
 };
 
-io.on('connection', function(socket){
+start(0);
 
-  console.log('a user connected');
+io.on('connection', function(socket){
+  // send all data
+  socket.emit('votes', votes);
+
   socket.on('choice', function(what){
-    if (what === 'justin bieber') {
-      votes['justin bieber']++;
+    console.log('what');
+    if (what === 'left') {
+      votes.left.total++;
     } else {
-      votes['one direction']++;
+      votes.right.total++;
     }
     socket.emit('total', votes);
   });
+
 });
 
 http.listen(3000, function(){
